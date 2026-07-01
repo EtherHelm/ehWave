@@ -1,0 +1,79 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.com
+    \\  /    A nd           | Version:  2512
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      controlDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+application     interFoam;
+
+libs            ("./libehWave.so");
+
+startFrom       startTime;
+
+startTime       0;
+
+stopAt          endTime;
+
+endTime         8;
+
+deltaT          0.00125;
+
+writeControl    timeStep;
+
+writeInterval   640;
+
+purgeWrite      0;
+
+writeFormat     ascii;
+
+writePrecision  6;
+
+writeCompression off;
+
+timeFormat      general;
+
+timePrecision   6;
+
+runTimeModifiable yes;
+
+adjustTimeStep  no;
+
+maxCo           0.5;
+
+maxAlphaCo      0.5;
+
+functions
+{
+    freeSurfaceSurf
+    {
+        type            surfaces;
+        libs            ("libsampling.so");
+        enabled         true;
+        writeControl    writeTime;
+        writeInterval   1;
+        surfaceFormat   vtk;
+        writeOptions    binary;
+        fields          ();
+        surfaces
+        {
+            isoSurface
+            {
+                type            isoSurface;
+                isoField        alpha.water;
+                isoValue        0.5;
+                interpolate     true;
+            }
+        }
+    }
+}
