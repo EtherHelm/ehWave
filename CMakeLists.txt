@@ -57,6 +57,7 @@ add_library(ehWave SHARED
     src/waveModels/GPLWave.cxx
     src/waveModels/CalmWater.cxx
     src/setWaveFieldFunc.cxx
+    src/ehFreeSurfaceCoupling.cxx
 )
 
 target_link_options(ehWave PRIVATE
@@ -71,6 +72,7 @@ target_link_libraries(ehWave PRIVATE
     finiteVolume
     meshTools
     fvOptions
+    sampling
 )
 
 target_link_libraries(ehWave PRIVATE nng)
@@ -97,4 +99,5 @@ target_link_libraries(setWaveField PRIVATE
     Pstream
     dl
 )
+
 

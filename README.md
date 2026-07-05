@@ -30,6 +30,7 @@
 - [Usage Guide](#-usage-guide)
 - [Examples](#-examples)
 - [Roadmap](#-roadmap)
+- [Contributions & Feedback](#-contributions--feedback)
 - [License](#-license)
 
 ---
@@ -55,17 +56,17 @@
 |---------|-------------|
 | **Wave BCs** | `ehWaveVel` / `ehWaveAlpha` boundary conditions for velocity and phase fraction fields |
 | **EOM Absorption** | Relaxation-zone wave absorption via `fvOptions` using the External Origin Matching technique |
-| **Stokes Deep-Water Wave** | 5th-order Stokes deep-water wave theory (Fenton, 1985) |
+| **Viscous–Potential Bidirectional Coupling** | Far-field nonlinear potential flow solver coupled with near-field viscous solver, greatly extending the effective computational domain |
 | **Calm Water Model** | `CalmWater` — zero-velocity, zero-elevation baseline model |
+| **Stokes Deep-Water Wave** | 5th-order Stokes deep-water wave theory (Fenton, 1985) |
+| **High-Order Spectral (HOS) Waves** | Nonlinear wave evolution based on HOS and Periodic Fundamental Solution (PFS) methods, supporting deep-water, shallow-water, long-crested, and short-crested irregular waves at arbitrary directions |
 | **Field Initialization** | `setWaveField` CLI tool to initialize `U` and `alpha.water` fields from wave theory |
 | **Modular Architecture** | RTS-based `waveModel` hierarchy — easily extendable with new wave types |
 
 ### 🔄 In Progress
 
 - Finite-depth nonlinear regular waves
-- High-Order Spectral (HOS) waves
-- Two-way viscous–potential coupling
-- Tutorials and comprehensive documentation
+- Improved tutorials and documentation
 
 ---
 
@@ -138,6 +139,7 @@ Supported wave models:
 |-------|-----------|-------------|
 | `StokesWave` | StokesWave | 5th-order Stokes deep-water wave |
 | `CalmWater` | CalmWater | Calm water (zero velocity, zero elevation) |
+| `GPLWave` | GPLWave | Viscous–potential coupled wave model based on the GPL solver, supporting both one-way and two-way coupling |
 
 ### 3️⃣ Set Boundary Conditions
 
@@ -196,7 +198,25 @@ relax
 }
 ```
 
-### 5️⃣ Initialize Fields
+### 5️⃣ Configure Viscous–Potential Bidirectional Coupling (Optional)
+
+Enable two-way coupling in `constant/ehWaveProperties` (required only for the `GPLWave` model):
+
+```cpp
+wave1
+{
+    waveType        GPLWave;
+    // ...wave parameters...
+    ehTwoWayCoupling
+    {
+        type            ehTwoWayCoupling;
+        enabled         true;
+        waveName        wave1;
+    }
+}
+```
+
+### 6️⃣ Initialize Fields
 
 Run the `setWaveField` tool from your case directory:
 
@@ -219,6 +239,7 @@ waveName        wave1;
 | Example | Path | Description |
 |---------|------|-------------|
 | 2D Stokes Wave | `examples/stokes_wave_2D/` | 2D Stokes deep-water wave generation & absorption |
+| One-Way Viscous–Potential Coupling | `examples/GPL_one_way_coupling/` | Nonlinear potential flow solver generates waves, one-way coupled into the viscous solver for propagation |
 
 Run an example:
 
@@ -235,19 +256,25 @@ bash run.sh
 - [x] Wave boundary conditions (`ehWaveVel`, `ehWaveAlpha`)
 - [x] EOM wave absorption
 - [x] Deep-water Stokes wave (5th order)
-- [ ] Finite-depth nonlinear regular waves
-- [ ] High-Order Spectral (HOS) waves
-- [ ] Two-way viscous–potential coupling
-- [ ] Tutorials and comprehensive documentation
-- [ ] CI/CD automated testing
+- [x] High-Order Spectral (HOS) waves
+- [x] Two-way viscous–potential coupling
+- [ ] Finite-depth nonlinear regular waves at arbitrary directions
+- [ ] Improved tutorials and documentation
+- [ ] Open-source GPLServer code
+
+---
+
+## 🤝 Contributions & Feedback
+
+We welcome your contributions and feedback!
+
+- **Report Bugs** — If you encounter any issues, please file a bug report on [GitHub Issues](https://github.com/EtherHelm/ehWave/issues) with reproduction steps and environment details.
+- **Porting Requests** — If you need support for a different OpenFOAM version or build environment, feel free to contact the authors or open an issue describing your requirements.
+- **Feature Suggestions** — Ideas for new features or improvements are always welcome — start a discussion!
 
 ---
 
 ## 📄 License
 
 ehWave is released under the **GNU General Public License v3 (GPLv3)**. See [LICENSE](./LICENSE) for details.
-
-Third-party dependencies:
-
-- **Eigen** — licensed under MPL2 (see `third_party/eigen/`)
 

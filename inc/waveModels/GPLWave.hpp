@@ -39,10 +39,12 @@ public:
             throw std::runtime_error("MapViewOfFile failed");
         }
 #else
+        std::string filepath = name;
+        if (filepath[0] == '/') filepath = "/tmp" + filepath;
         int flags = create ? (O_CREAT | O_RDWR) : O_RDWR;
-        shm_fd = shm_open(name.c_str(), flags, 0666);
+        shm_fd = open(filepath.c_str(), flags, 0666);
         if (shm_fd < 0)
-            throw std::runtime_error("shm_open failed");
+            throw std::runtime_error("open failed: " + filepath);
         if (create && ftruncate(shm_fd, size) != 0)
             throw std::runtime_error("ftruncate failed");
         shm_ptr = mmap(nullptr, size, PROT_READ | PROT_WRITE, MAP_SHARED, shm_fd, 0);
@@ -103,7 +105,9 @@ public:
     void unlink()
     {
 #ifndef _WIN32
-        shm_unlink(shm_name.c_str());
+        std::string filepath = shm_name;
+        if (filepath[0] == '/') filepath = "/tmp" + filepath;
+        ::unlink(filepath.c_str());
 #endif
     }
 
@@ -142,6 +146,11 @@ public:
     void updateTime(scalar t) override;
     void restore(scalar t, const word& timeName) override;
     void write(Ostream& os) const override;
+    void sendFreeSurface
+    (
+        scalar t,
+        const Eigen::Ref<const Eigen::MatrixXd>& points
+    ) const;
     void computeVel
     (
         const Eigen::Ref<const Eigen::MatrixXd>& points,

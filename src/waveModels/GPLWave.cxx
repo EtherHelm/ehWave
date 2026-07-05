@@ -103,7 +103,10 @@ public:
         memcpy(body + routerLen + nameLen + 2, &shm_size, sizeof(size_t));
 
         if (!sendAndRecv(sock_, msg))
+        {
+            shm.unlink();
             return;
+        }
 
         shm.resetOffset();
         float* floatResult = static_cast<float*>(shm.data());
@@ -334,6 +337,23 @@ void GPLWave::computeEta
 ) const
 {
     compute("getEtaVOF", points, result.data(), points.cols());
+}
+
+void GPLWave::sendFreeSurface
+(
+    scalar t,
+    const Eigen::Ref<const Eigen::MatrixXd>& points
+) const
+{
+    int nPoints = points.cols();
+    if (nPoints == 0) return;
+
+    int procId = UPstream::myProcNo();
+
+    ShmWriter shm(nPoints, sock_, connected_, ipcUrl_);
+    shm.write(&t, 1);
+    shm.write(points.data(), nPoints * 3);
+    shm.pullResult("pushEtaVOF", nullptr, 0);
 }
 
 }
