@@ -37,7 +37,7 @@
 
 ## 🌊 Introduction
 
-**ehWave** is a non-intrusive wave simulation plugin for **OpenFOAM v2512**, providing wave generation, wave absorption via **EOM** (External Origin Matching), and viscous–potential flow coupling capabilities. It is designed around three core principles:
+**ehWave** is a non-intrusive wave simulation plugin for **OpenFOAM v2512**, providing wave generation, wave absorption via **EOM** (Euler Overlay Method), and viscous–potential flow coupling capabilities. It is designed around three core principles:
 
 - **Non-intrusive** — Works with existing solvers out of the box via `fvOptions` and boundary conditions — no solver source modification required.
 - **Modular** — Built on a runtime selection table (RTS) architecture centered around the `waveModel` base class, making it straightforward to add new wave theories.
@@ -55,7 +55,7 @@
 | Feature | Description |
 |---------|-------------|
 | **Wave BCs** | `ehWaveVel` / `ehWaveAlpha` boundary conditions for velocity and phase fraction fields |
-| **EOM Absorption** | Relaxation-zone wave absorption via `fvOptions` using the External Origin Matching technique |
+| **EOM Absorption** | Relaxation-zone wave absorption via `fvOptions` using the Euler Overlay Method |
 | **Viscous–Potential Bidirectional Coupling** | Far-field nonlinear potential flow solver coupled with near-field viscous solver, greatly extending the effective computational domain |
 | **Calm Water Model** | `CalmWater` — zero-velocity, zero-elevation baseline model |
 | **Stokes Deep-Water Wave** | 5th-order Stokes deep-water wave theory (Fenton, 1985) |
