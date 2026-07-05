@@ -3,3 +3,4 @@ build
 bin
 CMakePresets.json
 .vscode
+examples/stokes_wave_3D

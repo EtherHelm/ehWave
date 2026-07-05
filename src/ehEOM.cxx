@@ -213,6 +213,7 @@ bool Foam::fv::ehEOM::read(const dictionary& dict)
     }
     const auto& waveProps = mesh_.lookupObject<IOdictionary>("ehWaveProperties");
     wave_ = &waveModel::getOrCreate(waveName_, waveProps.subDict(waveName_));
+    wave_->restore(mesh_.time().value(), mesh_.time().timeName());
 
     fieldNames_.resize(1);
     fieldNames_.first() = "U";

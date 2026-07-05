@@ -1,3 +1,6 @@
 [submodule "third_party/eigen"]
 	path = third_party/eigen
 	url = https://gitlab.com/libeigen/eigen.git
+[submodule "third_party/nng-1.11"]
+	path = third_party/nng-1.11
+	url = https://github.com/nanomsg/nng.git

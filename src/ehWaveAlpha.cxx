@@ -40,6 +40,7 @@ ehWaveAlpha::ehWaveAlpha
     }
     const auto& waveProps = db().lookupObject<IOdictionary>("ehWaveProperties");
     wave_ = &waveModel::getOrCreate(waveName_, waveProps.subDict(waveName_));
+    wave_->restore(db().time().value(), db().time().timeName());
 
     refValue() = Zero;
     refGrad() = Zero;
@@ -142,6 +143,7 @@ void ehWaveAlpha::write(Ostream& os) const
     fvPatchField<scalar>::write(os);
     os.writeEntry("waveName", waveName_);
     writeEntry("value", os);
+    if (wave_) wave_->write(os);
 }
 
 }

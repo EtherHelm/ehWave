@@ -34,6 +34,7 @@ public:
     virtual autoPtr<waveModel> clone() const = 0;
 
     virtual void updateTime(scalar t);
+    virtual void restore(scalar t, const word& timeName) {}
 
     void getVel
     (

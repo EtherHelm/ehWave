@@ -44,6 +44,7 @@ extern "C" void setWaveFieldFields(Foam::fvMesh* meshPtr, Foam::Time* runTimePtr
 
     // --- Set wave time to startTime ---
     const scalar t = runTime.startTime().value();
+    wave->restore(t, runTime.timeName());
     wave->updateTime(t);
 
     const label nCells = mesh.nCells();

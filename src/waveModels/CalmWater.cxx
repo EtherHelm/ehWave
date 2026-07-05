@@ -1,4 +1,4 @@
-#include "CalmWater.hpp"
+#include "waveModels/CalmWater.hpp"
 #include "addToRunTimeSelectionTable.H"
 
 namespace Foam

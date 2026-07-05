@@ -17,11 +17,18 @@ add_definitions(
     -DWM_DP
     -DWM_LABEL_SIZE=32
     -DNoRepository
-    -ftemplate-depth-100
+)
+
+add_compile_options(
     -m64
     -pthread
     -frounding-math
+    $<$<COMPILE_LANGUAGE:CXX>:-ftemplate-depth=100>
 )
+
+set(NNG_TESTS OFF CACHE BOOL "Disable nng tests" FORCE)
+set(NNG_ENABLE_NNGCAT OFF CACHE BOOL "Disable nngcat" FORCE)
+add_subdirectory(third_party/nng-1.11)
 
 include_directories(
     ./inc
@@ -46,8 +53,9 @@ add_library(ehWave SHARED
     src/ehWaveAlpha.cxx
     src/ehEOM.cxx
     src/waveModel.cxx
-    src/StokesWave.cxx
-    src/CalmWater.cxx
+    src/waveModels/StokesWave.cxx
+    src/waveModels/GPLWave.cxx
+    src/waveModels/CalmWater.cxx
     src/setWaveFieldFunc.cxx
 )
 
@@ -64,6 +72,10 @@ target_link_libraries(ehWave PRIVATE
     meshTools
     fvOptions
 )
+
+target_link_libraries(ehWave PRIVATE nng)
+target_compile_definitions(ehWave PRIVATE NNG_STATIC_LIB)
+target_compile_definitions(ehWave PRIVATE NNG_ELIDE_DEPRECATED)
 
 # --- setWaveField utility ---
 # Thin wrapper that loads libehWave.so via dlopen at runtime.

@@ -1,0 +1,31 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.com
+    \\  /    A nd           | Version:  2512
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "constant";
+    object      ehWaveProperties;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+wave1
+{
+    waveType        GPLWave;
+    filePath        "constant/waveIni.bin";
+    ipcUrl          "abstract://GPLWave_1";
+    serverPath      "./GPLServer";
+    logPath         "gplserver.log";
+}
+
+
+wave2
+{
+    waveType        CalmWater;
+}

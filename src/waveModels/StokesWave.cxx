@@ -1,4 +1,4 @@
-#include "StokesWave.hpp"
+#include "waveModels/StokesWave.hpp"
 #include "addToRunTimeSelectionTable.H"
 #include <cmath>
 
