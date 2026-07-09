@@ -1,0 +1,49 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.com
+    \\  /    A nd           | Version:  2512
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "constant";
+    object      ehWaveProperties;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+
+wave1
+{
+    waveType        RegularWave;
+    waveLength      1.0;
+    waterDepth      2.0;
+    waveHeight      0.05;
+    waveCrestIni     0.333; // initial wave crest position (x,0)
+    waveDirection   (1 1 0);
+}
+
+wave1_GPL
+{
+    waveType        GPLWave;
+    filePath        "constant/waveIni.slim.bin";
+    ipcUrl          "abstract://GPLWave_1";
+    serverPath      "./GPLServer";
+    logPath         "gplserver.log";
+}
+
+wave1_Stokes
+{
+    waveType        StokesWave;
+    waveHeight      0.05;
+    wavePeriod      0.8;
+}
+
+
+wave2
+{
+    waveType        CalmWater;
+}

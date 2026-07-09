@@ -6,8 +6,8 @@
 </p>
 
 <p align="center">
-  <a href="./docs/README.md"><strong>📖 English</strong></a> ·
-  <a href="./docs/README.zh.md"><strong>🌐 简体中文</strong></a>
+  <a href="./README.md"><strong>📖 English</strong></a> ·
+  <a href="./README.zh.md"><strong>🌐 简体中文</strong></a>
 </p>
 
 <p align="center">

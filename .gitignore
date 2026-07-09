@@ -3,7 +3,7 @@ build
 bin
 CMakePresets.json
 .vscode
-examples/stokes_wave_3D
-wake
 examples/two_way_coupling_3D
 examples/two_way_coupling_DTC_hull
+inc/GUI
+plotter

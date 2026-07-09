@@ -10,20 +10,40 @@ FoamFile
     version     2.0;
     format      ascii;
     class       dictionary;
-    location    "constant";
-    object      ehWaveProperties;
+    location    "system";
+    object      fvSchemes;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-wave1
+ddtSchemes
 {
-    waveType        StokesWave;
-    waveHeight      0.05;
-    wavePeriod      0.8;
+    default         CrankNicolson 0.5;
 }
 
-
-wave2
+gradSchemes
 {
-    waveType        CalmWater;
+    default         Gauss linear;
+}
+
+divSchemes
+{
+    div(rhoPhi,U)   Gauss linearUpwind grad(U);
+    div(phi,alpha)  Gauss vanLeer;
+    div(phirb,alpha) Gauss linear;
+    div(((rho*nuEff)*dev2(T(grad(U))))) Gauss linear;
+}
+
+laplacianSchemes
+{
+    default         Gauss linear orthogonal;
+}
+
+interpolationSchemes
+{
+    default         linear;
+}
+
+snGradSchemes
+{
+    default         orthogonal;
 }

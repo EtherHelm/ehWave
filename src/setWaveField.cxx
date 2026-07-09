@@ -10,11 +10,22 @@
 using namespace Foam;
 
 // Find and load libehWave.so:
-//   1) Same directory as the setWaveField executable
-//   2) Entries listed in system/controlDict 'libs'
-//   3) FatalError if not found
+//   1) Already loaded (e.g. by OpenFOAM's controlDict 'libs')
+//   2) Same directory as the setWaveField executable
+//   3) Entries listed in system/controlDict 'libs'
+//   4) FatalError if not found
 static void* loadLibehWave(const Time& runTime)
 {
+    // --- 0) Already loaded (e.g. by OpenFOAM from controlDict libs) ---
+    {
+        void* handle = dlopen("libehWave.so", RTLD_LAZY | RTLD_NOLOAD);
+        if (handle)
+        {
+            Info << "setWaveField: using already-loaded libehWave.so" << endl;
+            return handle;
+        }
+    }
+
     // --- 1) Same directory as executable ---
     {
         char buf[4096];
@@ -62,7 +73,7 @@ static void* loadLibehWave(const Time& runTime)
     // --- 3) Not found ---
     FatalErrorInFunction
         << "Cannot locate libehWave.so" << nl
-        << "Searched: directory of the executable" << nl
+        << "Searched: already-loaded, directory of the executable" << nl
         << "  and entries in system/controlDict 'libs'"
         << exit(FatalError);
 

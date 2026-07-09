@@ -56,6 +56,7 @@ add_library(ehWave SHARED
     src/waveModels/StokesWave.cxx
     src/waveModels/GPLWave.cxx
     src/waveModels/CalmWater.cxx
+    src/waveModels/RegularWave.cxx
     src/setWaveFieldFunc.cxx
     src/ehFreeSurfaceCoupling.cxx
 )
@@ -99,5 +100,3 @@ target_link_libraries(setWaveField PRIVATE
     Pstream
     dl
 )
-
-
