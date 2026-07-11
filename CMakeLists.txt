@@ -13,8 +13,9 @@ set(NNG_TESTS OFF CACHE BOOL "" FORCE)
 set(NNG_ENABLE_NNGCAT OFF CACHE BOOL "" FORCE)
 add_subdirectory(third_party/nng-1.11)
 
+# Set OF_PREFIX to match your OpenFOAM installation path
+# Examples: /usr/lib/openfoam/openfoam2512, /usr/lib/openfoam/openfoam2406, etc.
 set(OF_PREFIX /usr/lib/openfoam/openfoam2512)
-# set(OF_PREFIX /usr/lib/openfoam/openfoam2206)
 include_directories(
     ./inc
     ./third_party/eigen

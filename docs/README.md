@@ -11,7 +11,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/OpenFOAM-2512-blue?logo=openfoam" alt="OpenFOAM">
+  <img src="https://img.shields.io/badge/OpenFOAM-2206%2B-blue?logo=openfoam" alt="OpenFOAM">
   <img src="https://img.shields.io/badge/C++-17-blue?logo=cplusplus" alt="C++17">
   <img src="https://img.shields.io/badge/license-GPLv3-green" alt="License">
   <img src="https://img.shields.io/badge/status-alpha-yellow" alt="Status">
@@ -34,7 +34,7 @@
 
 ## 🌊 Introduction
 
-**ehWave** is a non-intrusive wave simulation toolkit for **OpenFOAM v2512**, providing wave generation, wave absorption, and viscous–potential flow coupling. It is designed around three core principles:
+**ehWave** is a non-intrusive wave simulation toolkit for **OpenFOAM v2206 and later**, providing wave generation, wave absorption, and viscous–potential flow coupling. It is designed around three core principles:
 
 - **Non-intrusive** — Works with existing solvers out of the box via `fvOptions` and boundary conditions — no solver source modification required.
 - **Modular** — Built on a runtime selection table (RTS) architecture centered around the `waveModel` base class, making it straightforward to add new wave theories.
@@ -74,7 +74,7 @@
 
 | Dependency | Version |
 |------------|---------|
-| OpenFOAM | v2512 |
+| OpenFOAM | v2206+ |
 | C++ Compiler | GCC 10+ (C++17 support) |
 | CMake | 3.20+ |
 | Eigen | 3.4+ (included as a `third_party` submodule) |
@@ -89,8 +89,8 @@ cd ehWave
 # If you already cloned without --recursive, run:
 # git submodule update --init --recursive
 
-# 2. Source the OpenFOAM environment (adjust path as needed)
-source /usr/lib/openfoam/openfoam2512/etc/bashrc
+# 2. Source the OpenFOAM environment (adjust path to match your version)
+source /usr/lib/openfoam/openfoamXXXX/etc/bashrc   # e.g., openfoam2512, openfoam2406, etc.
 
 # 3. Build
 mkdir -p build && cd build

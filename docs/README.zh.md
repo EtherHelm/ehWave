@@ -11,7 +11,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/OpenFOAM-2512-blue?logo=openfoam" alt="OpenFOAM">
+  <img src="https://img.shields.io/badge/OpenFOAM-2206%2B-blue?logo=openfoam" alt="OpenFOAM">
   <img src="https://img.shields.io/badge/C++-17-blue?logo=cplusplus" alt="C++17">
   <img src="https://img.shields.io/badge/license-GPLv3-green" alt="License">
   <img src="https://img.shields.io/badge/status-alpha-yellow" alt="Status">
@@ -34,7 +34,7 @@
 
 ## 🌊 简介
 
-**ehWave** 是一个面向 **OpenFOAM v2512** 的非侵入式波浪模拟插件，提供造波、消波及黏-势流耦合功能。其设计理念是：
+**ehWave** 是一个面向 **OpenFOAM v2206 及之后版本** 的非侵入式波浪模拟插件，提供造波、消波及黏-势流耦合功能。其设计理念是：
 
 - **非侵入** —— 无需修改求解器源码，通过 `fvOptions` 和边界条件即可使用
 - **模块化** —— 基于运行时选择表（RTS）的波浪模型架构，易于扩展
@@ -74,9 +74,9 @@
 
 | 依赖 | 版本 |
 |------|------|
-| OpenFOAM | v2512 |
+| OpenFOAM | v2206+ |
 | C++ 编译器 | GCC 10+ (支持 C++17) |
-| CMake | 3.20+ |
+| CMake | 3.10+ |
 | Eigen | 3.4+ (已作为 third_party 子模块包含) |
 
 ### 安装步骤
@@ -90,7 +90,7 @@ cd ehWave
 # git submodule update --init --recursive
 
 # 2. 配置 OpenFOAM 环境（根据实际安装路径调整）
-source /usr/lib/openfoam/openfoam2512/etc/bashrc
+source /usr/lib/openfoam/openfoamXXXX/etc/bashrc   # 例如 openfoam2512、openfoam2406 等
 
 # 3. 构建
 mkdir -p build && cd build
