@@ -20,7 +20,7 @@ wave1
     waveType        GPLWave;
     filePath        "constant/waveIni.bin";
     ipcUrl          "abstract://GPLWave_1";
-    serverPath      "./GPLServer";
+    serverPath      "../../bin/GPLServer";
     logPath         "gplserver.log";
 }
 

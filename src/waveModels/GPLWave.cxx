@@ -149,7 +149,8 @@ GPLWave::GPLWave(const dictionary& dict)
         startServer();
         sleep(1);
     }
-    UPstream::barrier(UPstream::worldComm);
+    char dummy = 0;
+    UPstream::broadcast(&dummy, 1, UPstream::worldComm);
 }
 
 GPLWave::GPLWave(const GPLWave& rhs)

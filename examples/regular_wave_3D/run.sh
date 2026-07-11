@@ -1,4 +1,6 @@
 #!/bin/bash
+rm -rf 0
+cp -r 0.orig 0
 
 # Clean OpenFOAM calculation results
 echo "Cleaning previous results..."
@@ -9,7 +11,7 @@ foamListTimes -rm
 # Initialize the case
 echo "Initializing the case..."
 blockMesh
-./setWaveField
+../../bin/setWaveField
 
 # Decompose mesh for parallel computing
 echo "Decomposing mesh..."

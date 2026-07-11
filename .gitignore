@@ -5,5 +5,6 @@ CMakePresets.json
 .vscode
 examples/two_way_coupling_3D
 examples/two_way_coupling_DTC_hull
+docs/tutorial*
 inc/GUI
 plotter

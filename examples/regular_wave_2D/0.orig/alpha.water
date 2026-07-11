@@ -43,17 +43,11 @@ boundaryField
         inletValue      uniform 0;
         value           uniform 0;
     }
-    front
+    sides
     {
-        type            ehWaveAlpha;
-        waveName        wave1;
-    }
-
-    back
-    {
-        type            ehWaveAlpha;
-        waveName        wave1;
+        type            empty;
     }
 }
+
 
 // ************************************************************************* //

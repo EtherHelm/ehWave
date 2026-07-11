@@ -52,7 +52,7 @@ public:
 
     virtual tmp<fvPatchField<vector>> clone() const
     {
-        return fvPatchField<vector>::Clone(*this);
+        return tmp<fvPatchField<vector>>(new ehWaveVel(*this));
     }
 
     virtual tmp<fvPatchField<vector>> clone
@@ -60,7 +60,7 @@ public:
         const DimensionedField<vector, volMesh>& iF
     ) const
     {
-        return fvPatchField<vector>::Clone(*this, iF);
+        return tmp<fvPatchField<vector>>(new ehWaveVel(*this, iF));
     }
 
     virtual void updateCoeffs();

@@ -9,51 +9,44 @@ FoamFile
 {
     version     2.0;
     format      ascii;
-    class       volScalarField;
+    class       volVectorField;
     location    "0";
-    object      p_rgh;
+    object      U;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-dimensions      [1 -1 -2 0 0 0 0];
+dimensions      [0 1 -1 0 0 0 0];
 
-internalField   uniform 0;
+internalField   uniform (0 0 0);
 
 boundaryField
 {
     inlet
     {
-        type            fixedFluxPressure;
-        value           uniform 0;
+        type            ehWaveVel;
+        waveName        wave1;
     }
 
     outlet
     {
-        type            fixedFluxPressure;
-        value           uniform 0;
+        type            ehWaveVel;
+        waveName        wave1;
     }
 
     ground
     {
-        type            fixedFluxPressure;
-        value           uniform 0;
+        type            ehWaveVel;
+        waveName        wave1;
     }
 
     top
     {
-        type            totalPressure;
-        p0              uniform 0;
+        type            pressureInletOutletVelocity;
+        value           uniform (0 0 0);
     }
 
-    front
+    sides
     {
-        type            fixedFluxPressure;
-        value           uniform 0;
-    }
-
-    back
-    {
-        type            fixedFluxPressure;
-        value           uniform 0;
+        type            empty;
     }
 }

@@ -46,9 +46,16 @@ ehWaveVel::ehWaveVel
     refGrad() = Zero;
     valueFraction() = Zero;
 
-    if (!this->readValueEntry(dict))
+    if (dict.found("value"))
     {
-        fvPatchField<vector>::extrapolateInternal();
+        Field<vector>::operator=
+        (
+            Field<vector>("value", dict, this->size())
+        );
+    }
+    else
+    {
+        this->patch().patchInternalField(this->internalField(), *this);
     }
 }
 

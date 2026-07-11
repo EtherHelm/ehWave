@@ -46,10 +46,18 @@ ehWaveAlpha::ehWaveAlpha
     refGrad() = Zero;
     valueFraction() = 0.0;
 
-    if (!this->readValueEntry(dict))
+    if (dict.found("value"))
     {
-        fvPatchField<scalar>::extrapolateInternal();
+        Field<scalar>::operator=
+        (
+            Field<scalar>("value", dict, this->size())
+        );
     }
+    else
+    {
+        this->patch().patchInternalField(this->internalField(), *this);
+    }
+
 }
 
 ehWaveAlpha::ehWaveAlpha

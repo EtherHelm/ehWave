@@ -41,7 +41,7 @@ static void* loadLibehWave(const Time& runTime)
                 void* handle = dlopen(libPath.c_str(), RTLD_LAZY | RTLD_LOCAL);
                 if (handle)
                 {
-                    Info << "setWaveField: loaded " << libPath << endl;
+                    Info << "setWaveField: loaded " << libPath.c_str() << endl;
                     return handle;
                 }
             }
@@ -62,7 +62,7 @@ static void* loadLibehWave(const Time& runTime)
                     void* handle = dlopen(libStr.c_str(), RTLD_LAZY | RTLD_LOCAL);
                     if (handle)
                     {
-                        Info << "setWaveField: loaded " << libStr << endl;
+                        Info << "setWaveField: loaded " << libStr.c_str() << endl;
                         return handle;
                     }
                 }
