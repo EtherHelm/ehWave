@@ -1,0 +1,49 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.com
+    \\  /    A nd           | Version:  2512
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "constant";
+    object      fvOptions;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+relax
+{
+    type            ehEOM;
+    active          off;
+    zones
+    (
+        { direction (1 0 0);  width 0.5; origin (0 0 0); }
+    );
+    waveName        wave1;
+    coeffVel        0.5;
+    characteristicFreq  7.8540;
+    alphaRelax      true;
+    coeffAlpha      0.1;
+    selectionMode   all;
+}
+
+
+damping
+{
+    type            ehEOM;
+    active          on;
+    zones
+    (
+        { direction (-1 0 0); width 1.5; origin (6 0 0); }
+    );
+    waveName        waveCalm;
+    coeffVel        1.0;
+    characteristicFreq  7.8540;
+    alphaRelax      true;
+    coeffAlpha      0.2;
+    selectionMode   all;
+}

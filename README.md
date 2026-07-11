@@ -76,7 +76,7 @@
 |------------|---------|
 | OpenFOAM | v2206+ |
 | C++ Compiler | GCC 10+ (C++17 support) |
-| CMake | 3.20+ |
+| CMake | 3.10+ |
 | Eigen | 3.4+ (included as a `third_party` submodule) |
 
 ### Installation
